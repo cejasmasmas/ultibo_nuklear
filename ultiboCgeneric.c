@@ -33,7 +33,7 @@
 #define MAX(a,b) ((a) < (b) ? (b) : (a))
 #define LEN(a) (sizeof(a)/sizeof(a)[0])
 
-#define NK_ULITBO_GLES2_IMPLEMENTATION
+#define NK_ULTIBO_GLES2_IMPLEMENTATION
 #include "nuklear/nuklear.h"
 #include "nuklear_ultibo_gles2.h"
 

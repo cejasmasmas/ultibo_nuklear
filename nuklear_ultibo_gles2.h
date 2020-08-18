@@ -37,7 +37,7 @@ NK_API void        nk_ultb_shutdown(void);
  *
  * ===============================================================
  */
-#ifdef NK_ULITBO_GLES2_IMPLEMENTATION
+#ifdef NK_ULTIBO_GLES2_IMPLEMENTATION
 
 #include <string.h>
 
