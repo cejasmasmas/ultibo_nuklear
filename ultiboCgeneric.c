@@ -30,11 +30,11 @@
 #define WINDOW_WIDTH ScreenWidth
 #define WINDOW_HEIGHT ScreenHeight
 
-//#define MAX_VERTEX_MEMORY 512 * 1024
-//#define MAX_ELEMENT_MEMORY 128 * 1024
+#define MAX_VERTEX_MEMORY 512 * 1024
+#define MAX_ELEMENT_MEMORY 128 * 1024
 
-#define MAX_VERTEX_MEMORY 256 * 1024
-#define MAX_ELEMENT_MEMORY 64 * 1024
+//#define MAX_VERTEX_MEMORY 256 * 1024
+//#define MAX_ELEMENT_MEMORY 64 * 1024
 
 #define UNUSED(a) (void)a
 #define MIN(a,b) ((a) < (b) ? (a) : (b))
@@ -50,9 +50,11 @@
  * and the corresponding function. */
 #include "style.c"
 #include "calculator.c"
-#include "overview.c" //this needs a few extra functions to be implemented or redirected from ultibo
+#include "overview.c" 
 #include "node_editor.c"
 #include "extended.c"
+#include "canvas.c"
+#include "skinning.c"
 
 //***** From ultibo
 #ifdef __cplusplus
@@ -119,15 +121,19 @@ void ultibo_C_main()
 	
     nk_ultibo_font_stash_end();
     nk_style_load_all_cursors(ctx, atlas->cursors);
+	
     //nk_style_set_font(ctx, &roboto->handle);}
     nk_style_set_font(ctx, &media.font_18->handle);}
 	
 	load_extended_icons();
+	
+	apply_skin(ctx);
     /* style.c */
     /*set_style(ctx, THEME_WHITE);*/
     /*set_style(ctx, THEME_RED);*/
     /*set_style(ctx, THEME_BLUE);*/
     /*set_style(ctx, THEME_DARK);	*/
+	
 	 
  
 	while(1)
@@ -135,7 +141,9 @@ void ultibo_C_main()
 
 		
 	  getMouseXY(&PanelMouseX, &PanelMouseY, &ButtonsMouse);
-      nuklear_MainLoop((void*)ctx); // here is the gui code			
+      nuklear_MainLoop((void*)ctx); // here is the gui code
+
+      	  
         
 	  glSwapBuffer();
  
@@ -178,7 +186,8 @@ nuklear_MainLoop(void* loopArg){
 
 
     /* -------------- EXAMPLES ---------------- */
-    calculator(ctx);
+    //drawCanvas(ctx,ScreenWidth, ScreenHeight,media.font_18);  
+	calculator(ctx);
     overview(ctx); 
     node_editor(ctx);
 	
