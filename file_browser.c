@@ -351,7 +351,7 @@ file_browser_init(struct file_browser *browser, struct fb_media *fb_media)
 			unsigned int lv;
             strcpy(browser->desktop, browser->home);
             lv = strlen(browser->desktop);
-            strcpy(browser->desktop + lv, "desk\\");
+            strcpy(browser->desktop + lv, "example\\");
 //        }
 		
         browser->files = dir_list(browser->directory, 0, &browser->file_count);
