@@ -394,7 +394,7 @@ file_browser_run(struct file_browser *browser, struct nk_context *ctx)
             char *begin = d + 1;
             nk_layout_row_dynamic(ctx, 25, 6);
             while (*d++) {
-                if (*d == '/') {
+                if (*d == '\\') {
                     *d = '\0';
                     if (nk_button_label(ctx, begin)) {
                         *d++ = '\\'; *d = '\0';
