@@ -73,6 +73,7 @@ extern "C" {
 int PanelMouseX = 0;
 int PanelMouseY = 0;
 int ButtonsMouse = 0;
+int Key = 0;
 
 unsigned long int ScreenWidth = 800;
 unsigned long int ScreenHeight = 480;
@@ -179,14 +180,43 @@ nuklear_MainLoop(void* loopArg){
 		          break;
 	}
 	
+	
+	
 	nk_input_begin(ctx);
     nk_input_motion(ctx, (int)PanelMouseX,(int)PanelMouseY);	
     nk_input_button(ctx, NK_BUTTON_LEFT, (int)PanelMouseX, (int)PanelMouseY, BUTTON_LEFT);
     nk_input_button(ctx, NK_BUTTON_RIGHT, (int)PanelMouseX,(int)PanelMouseY, BUTTON_RIGHT);
     nk_input_button(ctx, NK_BUTTON_MIDDLE, (int)PanelMouseX,(int)PanelMouseY, BUTTON_MIDDLE);
+	//--------------- Keyboard Input ------------------
+	getKey(&Key);	
+    if((Key != -1) && (Key != 0)) 
+	{ 
+      if(Key == 0x0E)
+	   nk_input_key(ctx, NK_KEY_BACKSPACE, 1);	       
+      else if(Key == 0x0D)
+		  nk_input_key(ctx, NK_KEY_ENTER, 1);
+	  else if(Key == 0x53)
+		  nk_input_key(ctx, NK_KEY_DEL, 1);
+	  else if(Key == 0x09)
+		  nk_input_key(ctx, NK_KEY_TAB, 1);
+	  else if(Key == 0x47) //HOME
+	  {
+          nk_input_key(ctx, NK_KEY_TEXT_START, 1);
+          //nk_input_key(ctx, NK_KEY_SCROLL_START, 1);	//Also moves the scroll bar	  
+	  }
+	  else if(Key == 0x4F) 
+	  {
+          nk_input_key(ctx, NK_KEY_TEXT_END, 1);
+          //nk_input_key(ctx, NK_KEY_SCROLL_END, 1);	//Also moves the scroll bar  
+	  } 
+      else       		  
+		 nk_input_char(ctx, (char)Key); 
+	   
+	} 	
+    //--------------- Keyboard Input end	
     nk_input_end(ctx);
 
-
+	
     /* -------------- EXAMPLES ---------------- */
     //drawCanvas(ctx,ScreenWidth, ScreenHeight,media.font_18);  
 	calculator(ctx);
